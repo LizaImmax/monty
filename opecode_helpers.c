@@ -1,5 +1,9 @@
 #include "monty.h"
 
+FILE *file_s;
+char *line_buf;
+int is_queue;
+
 /**
  * opcode_select - checks opcode string against list of opcode names,
  * calling a function if matched
