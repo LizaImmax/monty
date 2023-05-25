@@ -33,7 +33,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void push(stack_t **stack, unsigned int line_cnt);
+void push(stack_t **stack, unsigned int line_num);
 stack_t *add_node(stack_t **stack, const int n);
 stack_t *queue_node(stack_t **stack, const int n);
 
