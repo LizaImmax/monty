@@ -88,3 +88,77 @@ void atoi_filter(char *str, stack_t **stack, unsigned int line_number)
 		}
 	}
 }
+
+/**
+ * opcode_pall - prints all int values in the list, top to bottom, each followed
+ * by a newline
+ * @stack: first element of a doubly linked list of integers
+ * @line_number: line of monty text file currently seen by interpreter
+ */
+void opcode_pall(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = *stack;
+
+	(void)line_number;
+
+	while (temp)
+	{
+		printf("%i\n", temp->n);
+		temp = temp->next;
+	}
+}
+
+/**
+ * opcode_pint - prints int value at top of list; failure if list is empty
+ * @stack: first element of a doubly linked list of integers
+ * @line_number: line of monty text file currently seen by interpreter
+ */
+
+void op_pint(stack_t **stack, unsigned int line_number)
+{
+	if (*stack)
+	{
+		printf("%i\n", (*stack)->n);
+	}
+	else
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n",
+			line_number);
+		cleanup(stack);
+		exit(EXIT_FAILURE);
+	}
+}
+
+/**
+ * opcode_pop - removes top element of stack, if list > 1 elements, second element
+ * becomes top of stack; failure if list is empty
+ * @stack: first element of a doubly linked list of integers
+ * @line_number: line of monty text file currently seen by interpreter
+ */
+
+void op_pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = *stack;
+
+	if (*stack)
+	{
+		if ((*stack)->next)
+		{
+			*stack = (*stack)->next;
+			(*stack)->prev = NULL;
+			free(temp);
+		}
+		else
+		{
+			free(*stack);
+			*stack = NULL;
+		}
+	}
+	else
+	{
+		fprintf(stderr, "L%u: can't pop an empty stack\n",
+			line_number);
+		cleanup(stack);
+		exit(EXIT_FAILURE);
+	}
+}
