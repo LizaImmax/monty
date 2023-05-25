@@ -5,60 +5,109 @@
 #include "monty.h"
 
 /**
- * push - push element into the stack
- * @stack: stack given by main
- * @line_cnt: ammount of lines
- *
- * Return: void
+ * push - pushes an element to the top if stack, bottom if queue;
+ * failure if second token from iterpreter is not an int value
+ * @stack: first element of a doubly linked list of integers
+ * @line_number: line of monty text file currently seen by interpreter
  */
-void push(stack_t **stack, unsigned int line_cnt)
+void push(stack_t **stack, unsigned int line_number)
 {
-	char *n = global.argument;
+	char *push_n = NULL;
+	int value = 0;
+	stack_t *new = NULL, *temp = *stack;
 
-	if ((is_digit(n)) == 0)
+	push_n = strtok(NULL, " ");
+	atoi_filter(push_n, stack, line_number);
+	value = atoi(push_n);
+
+	new = malloc(sizeof(stack_t));
+	if (!new)
 	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_cnt);
-		status = EXIT_FAILURE;
-		return;
+		fprintf(stderr, "Error: malloc failed\n");
+		cleanup(stack);
+		exit(EXIT_FAILURE);
 	}
 
-	if (global.data_struct == 1)
+	new->n = value;
+	if (is_queue)
 	{
-		if (!add_node(stack, atoi(global.argument)))
+		if (*stack)
 		{
-			return;
-			status = EXIT_FAILURE;
+			while (temp->next)
+				temp = temp->next;
+			temp->next = new;
 		}
+		else
+			*stack = new;
+		new->prev = temp;
+		new->next = NULL;
 	}
 	else
 	{
-		if (!queue_node(stack, atoi(global.argument)))
+		if (*stack)
+			(*stack)->prev = new;
+		new->prev = NULL;
+		new->next = *stack;
+		*stack = new;
+	}
+}
+
+/**
+ * atoi_filter - checks string to see if it represents a valid integer.
+ * @str: string to be checked for compatibility with atoi
+ * @stack: first element of a doubly linked list of integers
+ * @line_number: line of monty text file currently seen by interpreter
+ */
+void atoi_filter(char *str, stack_t **stack, unsigned int line_number)
+{
+	int i;
+
+	if (!str || str[0] == '\0')
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		cleanup(stack);
+		exit(EXIT_FAILURE);
+	}
+
+	for (i = 0; str[i]; i++)
+	{
+		if (i == 0)
 		{
-			return;
-			status = EXIT_FAILURE;
+			if (str[i] != '-' &&
+			    !(str[i] >= 0 + '0' && str[i] <= 9 + '0'))
+			{
+				fprintf(stderr, "L%u: usage: push integer\n",
+					line_number);
+				cleanup(stack);
+				exit(EXIT_FAILURE);
+			}
+		}
+		else if (!(str[i] >= 0 + '0' && str[i] <= 9 + '0'))
+		{
+			fprintf(stderr, "L%u: usage: push integer\n",
+				line_number);
+			cleanup(stack);
+			exit(EXIT_FAILURE);
 		}
 	}
 }
 
-
 /**
- * is_digit - checks if a string is a digit
- * @string: string to check
- *
- * Return: 1 if success, 0 if not
+ * cleanup - uses global variables FILE *file_s and char *line_buf plus arg
+ * stack_t **stack to free allocated memory before any conditional exit().
+ * @stack: double pointer to top element in stack
  */
-
-int is_digit(char *string)
+void cleanup(stack_t **stack)
 {
-	if (!string || *string == '\0')
-		return (0);
-	if (*string == '-')
-		string++;
-	while (*string)
+	stack_t *temp;
+
+	if (line_buf)
+		free(line_buf);
+	while (*stack)
 	{
-		if (isdigit(*string) == 0)
-			return (0);
-		string++;
+		temp = *stack;
+		*stack = (*stack)->next;
+		free(temp);
 	}
-	return (1);
+	fclose(file_s);
 }
