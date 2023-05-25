@@ -34,6 +34,7 @@ typedef struct instruction_s
 } instruction_t;
 
 void push(stack_t **stack, unsigned int line_num);
+int is_digit(char *string);
 stack_t *add_node(stack_t **stack, const int n);
 stack_t *queue_node(stack_t **stack, const int n);
 void pall(stack_t **stack, unsigned int line_number);

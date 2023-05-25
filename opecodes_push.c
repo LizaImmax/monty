@@ -7,17 +7,17 @@
 /**
  * push - push element into the stack
  * @stack: stack given by main
- * @line_num: ammount of lines
+ * @line_cnt: ammount of lines
  *
  * Return: void
  */
-void push(stack_t **stack, unsigned int line_num)
+void push(stack_t **stack, unsigned int line_cnt)
 {
 	char *n = global.argument;
 
 	if ((is_digit(n)) == 0)
 	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_num);
+		fprintf(stderr, "L%d: usage: push integer\n", line_cnt);
 		status = EXIT_FAILURE;
 		return;
 	}
@@ -41,3 +41,24 @@ void push(stack_t **stack, unsigned int line_num)
 }
 
 
+/**
+ * is_digit - checks if a string is a digit
+ * @string: string to check
+ *
+ * Return: 1 if success, 0 if not
+ */
+
+int is_digit(char *string)
+{
+	if (!string || *string == '\0')
+		return (0);
+	if (*string == '-')
+		string++;
+	while (*string)
+	{
+		if (isdigit(*string) == 0)
+			return (0);
+		string++;
+	}
+	return (1);
+}
