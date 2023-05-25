@@ -1,13 +1,5 @@
 0x19. C - Stacks, Queues - LIFO, FIFO
-By Julien Barbier
-In a nutshell...
 
-
-Resources
-Read or watch:
-
-Google
-How do I use extern to share variables between source files in C?
 Learning Objectives
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 
@@ -34,6 +26,7 @@ All your header files should be include guarded
 You are expected to do the tasks in the order shown in the project
 GitHub
 There should be one project repository per group. If you clone/fork/whatever a project repository with the same name before the second deadline, you risk a 0% score.
+
 
 More Info
 Data structures
