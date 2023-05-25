@@ -48,4 +48,8 @@ void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 
+void cleanup(stack_t **stack);
+int opcode_select(char *opcode, stack_t **stack, unsigned int line_number);
+char *get_line(FILE *file, stack_t *stack);
+void parse_loop(FILE *file);
 #endif
