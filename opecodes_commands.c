@@ -61,13 +61,14 @@ void opcode_pstr(stack_t **stack, unsigned int line_number)
 	putchar('\n');
 }
 
-
 /**
- * opcode_rotr - rotates top element of list to bottom of list, 2nd becomes top
+ * opcode_rotl - rotates top element of list to bottom of list
+ * 2nd element becomes top
  * @stack: first element of a doubly linked list of integers
  * @line_number: line of monty text file currently seen by interpreter
  */
-void opcode_rotr(stack_t **stack, unsigned int line_number)
+
+void opcode_rotl(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tail, *temp;
 
@@ -87,12 +88,12 @@ void opcode_rotr(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * opcode_rotl - rotates bottom element of list to top of list
+ * opcode_rotr - rotates bottom element of list to top of list
  * @stack: first element of a doubly linked list of integers
  * @line_number: line of monty text file currently seen by interpreter
  */
 
-void opcode_rotl(stack_t **stack, unsigned int line_number)
+void opcode_rotr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
 
