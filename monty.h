@@ -38,5 +38,4 @@ void push(stack_t **stack, unsigned int line_number);
 void cleanup(stack_t **stack);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
-
-#endif 
+#endif

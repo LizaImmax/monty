@@ -4,19 +4,21 @@
 #include "monty.h"
 
 /**
- * pint - print the top data
- * @stack: stack given by main
- * @line_number: ammount of lines
- *
- * Return: void
+ * pint - prints int value at top of list; failure if list is empty
+ * @stack: first element of a doubly linked list of integers
+ * @line_number: line of monty text file currently seen by interpreter
  */
 void pint(stack_t **stack, unsigned int line_number)
 {
-	if (!stack || !(*stack))
+	if (*stack)
 	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
-		status = EXIT_FAILURE;
-		return;
+		printf("%i\n", (*stack)->n);
 	}
-	printf("%d\n", (*stack)->n);
+	else
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n",
+			line_number);
+		cleanup(stack);
+		exit(EXIT_FAILURE);
+	}
 }
