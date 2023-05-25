@@ -1,12 +1,12 @@
 #include "monty.h"
 
 /**
- * op_swap - swaps the top two elements of the list; failure if
- * < 2 elements in list
+ * opcode_swap - swaps the top two elements of the list
+ * failure if < 2 elements in list
  * @stack: first element of a doubly linked list of integers
  * @line_number: line of monty text file currently seen by interpreter
  */
-void op_swap(stack_t **stack, unsigned int line_number)
+void opcode_swap(stack_t **stack, unsigned int line_number)
 {
 	int temp_n;
 
@@ -26,12 +26,13 @@ void op_swap(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * op_add - finds sum of top two elements in the list; failure if
- * < 2 elements in list
+ * opcode_add - finds sum of top two elements in the list;
+ * failure if < 2 elements in list
  * @stack: first element of a doubly linked list of integers
  * @line_number: line of monty text file currently seen by interpreter
  */
-void op_add(stack_t **stack, unsigned int line_number)
+
+void opcode_add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
 	int sum;
@@ -53,11 +54,12 @@ void op_add(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * op_nop - "no operation," line skipped
+ * opcode_nop - "no operation," line skipped
  * @stack: first element of a doubly linked list of integers
  * @line_number: line of monty text file currently seen by interpreter
  */
-void op_nop(stack_t **stack, unsigned int line_number)
+
+void opcode_nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;

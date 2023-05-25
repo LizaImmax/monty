@@ -1,12 +1,14 @@
 #include "monty.h"
 
 /**
- * op_sub - subtracts the top element of the list from the second top
- * element of the list; failure if < 2 elements in list
+ * opcode_sub - subtracts the top element of the list from the second top
+ * element of the list
  * @stack: first element of a doubly linked list of integers
  * @line_number: line of monty text file currently seen by interpreter
+ * failure if < 2 elements in list
  */
-void op_sub(stack_t **stack, unsigned int line_number)
+
+void opcode_sub(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
 	int diff;
@@ -28,12 +30,12 @@ void op_sub(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * op_div - divides the second top element of the list by the top element
+ * opcode_div - divides the second top element of the list by the top element
  * of the stack; failure if < 2 elements in list, or top element is 0
  * @stack: first element of a doubly linked list of integers
  * @line_number: line of monty text file currently seen by interpreter
  */
-void op_div(stack_t **stack, unsigned int line_number)
+void opcode_div(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
 	int quot;
@@ -63,13 +65,14 @@ void op_div(stack_t **stack, unsigned int line_number)
 	}
 }
 
+
 /**
- * op_mul - multiplies the second top element of the list by the top element
+ * opcode_mul - multiplies the second top element of the list by the top element
  * of the list; failure if < 2 elements in list
  * @stack: first element of a doubly linked list of integers
  * @line_number: line of monty text file currently seen by interpreter
  */
-void op_mul(stack_t **stack, unsigned int line_number)
+void opcode_mul(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
 	int prod;
@@ -91,12 +94,12 @@ void op_mul(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * op_mod - finds modulo of the second top element of the list divided by the
+ * opcode_mod - finds modulo of the second top element of the list divided by the
  * top element; failure if < 2 elements in list, or top element is 0
  * @stack: first element of a doubly linked list of integers
  * @line_number: line of monty text file currently seen by interpreter
  */
-void op_mod(stack_t **stack, unsigned int line_number)
+void opcode_mod(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
 	int mod;

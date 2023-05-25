@@ -1,26 +1,6 @@
 #include "monty.h"
 
 /**
- * cleanup - uses global variables FILE *file_s and char *line_buf plus arg
- * stack_t **stack to free allocated memory before any conditional exit().
- * @stack: double pointer to top element in stack
- */
-void cleanup(stack_t **stack)
-{
-	stack_t *temp;
-
-	if (line_buf)
-		free(line_buf);
-	while (*stack)
-	{
-		temp = *stack;
-		*stack = (*stack)->next;
-		free(temp);
-	}
-	fclose(file_s);
-}
-
-/**
  * opcode_select - checks opcode string against list of opcode names,
  * calling a function if matched
  * @opcode: first ' ' delimited token of input line from parse_loop()
@@ -32,23 +12,23 @@ int opcode_select(char *opcode, stack_t **stack, unsigned int line_number)
 {
 	int i;
 	instruction_t codes[] = {
-		{"push", (*op_push)},
-		{"pall", (*op_pall)},
-		{"pint", (*op_pint)},
-		{"pop", (*op_pop)},
-		{"swap", (*op_swap)},
-		{"add", (*op_add)},
-		{"nop", (*op_nop)},
-		{"sub", (*op_sub)},
-		{"div", (*op_div)},
-		{"mul", (*op_mul)},
-		{"mod", (*op_mod)},
-		{"pchar", (*op_pchar)},
-		{"pstr", (*op_pstr)},
-		{"rotl", (*op_rotl)},
-		{"rotr", (*op_rotr)},
-		{"stack", (*op_stack)},
-		{"queue", (*op_queue)},
+		{"push", (*opcode_push)},
+		{"pall", (*opcode_pall)},
+		{"pint", (*opcode_pint)},
+		{"pop", (*opcode_pop)},
+		{"swap", (*opcode_swap)},
+		{"add", (*opcode_add)},
+		{"nop", (*opcode_nop)},
+		{"sub", (*opcode_sub)},
+		{"div", (*opcode_div)},
+		{"mul", (*opcode_mul)},
+		{"mod", (*opcode_mod)},
+		{"pchar", (*opcode_pchar)},
+		{"pstr", (*opcode_pstr)},
+		{"rotl", (*opcode_rotl)},
+		{"rotr", (*opcode_rotr)},
+		{"stack", (*opcode_stack)},
+		{"queue", (*opcode_queue)},
 		{NULL, NULL}
 	};
 
@@ -101,6 +81,26 @@ char *get_line(FILE *file, stack_t *stack)
 	if (line_buf)
 		line_buf[read_bytes - 1] = '\0';
 	return (line_buf);
+}
+
+/**
+ * cleanup - uses global variables FILE *file_s and char *line_buf plus arg
+ * stack_t **stack to free allocated memory before any conditional exit().
+ * @stack: double pointer to top element in stack
+ */
+void cleanup(stack_t **stack)
+{
+	stack_t *temp;
+
+	if (line_buf)
+		free(line_buf);
+	while (*stack)
+	{
+		temp = *stack;
+		*stack = (*stack)->next;
+		free(temp);
+	}
+	fclose(file_s);
 }
 
 /**
