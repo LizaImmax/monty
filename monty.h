@@ -36,5 +36,8 @@ typedef struct instruction_s
 void push(stack_t **stack, unsigned int line_num);
 stack_t *add_node(stack_t **stack, const int n);
 stack_t *queue_node(stack_t **stack, const int n);
+void pall(stack_t **stack, unsigned int line_num __attribute__((unused)));
+size_t print_stack(const stack_t *stack);
+
 
 #endif 
