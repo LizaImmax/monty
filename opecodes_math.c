@@ -90,7 +90,7 @@ void atoi_filter(char *str, stack_t **stack, unsigned int line_number)
 }
 
 /**
- * opcode_pall - prints all int values in the list, top to bottom, each followed
+ * opcode_pall - prints all int values in list, top to bottom,each followed
  * by a newline
  * @stack: first element of a doubly linked list of integers
  * @line_number: line of monty text file currently seen by interpreter
@@ -114,7 +114,7 @@ void opcode_pall(stack_t **stack, unsigned int line_number)
  * @line_number: line of monty text file currently seen by interpreter
  */
 
-void op_pint(stack_t **stack, unsigned int line_number)
+void opcode_pint(stack_t **stack, unsigned int line_number)
 {
 	if (*stack)
 	{
@@ -130,13 +130,14 @@ void op_pint(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * opcode_pop - removes top element of stack, if list > 1 elements, second element
+ * opcode_pop - removes top element of stack
+ * if list > 1 elements,second element
  * becomes top of stack; failure if list is empty
  * @stack: first element of a doubly linked list of integers
  * @line_number: line of monty text file currently seen by interpreter
  */
 
-void op_pop(stack_t **stack, unsigned int line_number)
+void opcode_pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
 

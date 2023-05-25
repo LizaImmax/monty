@@ -1,7 +1,8 @@
 #include "monty.h"
 
 /**
- * opcode_pchar - prints the int at top of list as char, followed by a new line;
+ * opcode_pchar - prints the int at top of list as char
+ * followed by a new line;
  * failure if int is not a printable ASCII value, or list is empty
  * @stack: first element of a doubly linked list of integers
  * @line_number: line of monty text file currently seen by interpreter
@@ -33,7 +34,8 @@ void opcode_pchar(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * opcode_pstr - prints the int values in the list, starting at the top, as chars,
+ * opcode_pstr - prints the int values in the list, starting at the top
+ * as chars
  * followed by a new line; ends if list is empty, or when int is not a
  * printable ASCII value
  * @stack: first element of a doubly linked list of integers
